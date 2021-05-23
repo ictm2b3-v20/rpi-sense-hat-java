@@ -1,11 +1,15 @@
 package rpi.sensehat.connector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rpi.sensehat.connector.mock.MockCommandExecutor;
 
 /**
  * Created by jcincera on 04/07/2017.
  */
 public class CommandExecutorFactory {
+
+    private static final Logger log = LoggerFactory.getLogger(CommandExecutorFactory.class);
 
     private static final String SENSE_HAT_EXECUTOR_TYPE = "SENSE_HAT_EXECUTOR_TYPE";
     private static final String SIMPLE_COMMAND = "SIMPLE_COMMAND";
@@ -18,7 +22,7 @@ public class CommandExecutorFactory {
         // Dev command executor for not ARM system (macOS etc.)
         String osArch = System.getProperty(OS_ARCH).toLowerCase();
         if (!osArch.contains(OS_ARCH_ARM)) {
-            System.out.println("ARM platform not detected! Using mock command executor.");
+            log.warn("ARM platform not detected! Using mock command executor.");
             return new MockCommandExecutor();
         }
 

@@ -1,5 +1,7 @@
 package rpi.sensehat.connector.mock;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rpi.sensehat.api.dto.CommandResult;
 import rpi.sensehat.connector.Command;
 import rpi.sensehat.connector.CommandExecutor;
@@ -9,9 +11,11 @@ import rpi.sensehat.connector.CommandExecutor;
  */
 public class MockCommandExecutor implements CommandExecutor {
 
+    private static final Logger log = LoggerFactory.getLogger(MockCommandExecutor.class);
+
     @Override
     public CommandResult execute(Command command, String... args) {
-        System.out.println("Mocking command: " + command.getCommand());
+        log.debug("Mocking command: " + command.getCommand());
 
         MockCommandResult result = new MockCommandResult("");
         result.setCommand(command);

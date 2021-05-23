@@ -1,10 +1,11 @@
+plugins {
+    id('application')
+    id('java')
+}
+
 group 'rpi.sensehat.hat'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'application'
-
-sourceCompatibility = 1.8
 mainClassName = "rpi.sensehat.example.Project"
 
 repositories {
@@ -12,10 +13,17 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation('junit:junit:4.13')
+    implementation("org.slf4j:slf4j-api:1.7.30")
 }
 
 test {
     dependsOn cleanTest
     testLogging.showStandardStreams = true
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
 }
